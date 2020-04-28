@@ -49,3 +49,5 @@ Declarative Programming:
 Red, Green, Refactor:
 - Utilize tests to keep you moving in the right direction
 - Follow the errors in the test to guide you each step of the way
+
+## Is this 'good' or 'bad' code? Why?
