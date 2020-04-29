@@ -10,13 +10,7 @@ class NeosAPI
     @date = query_date
   end
 
-  def neos_from_query_date
-    parse_neos_info[:near_earth_objects][:"#{date}"]
-  end
-
-  private
-
-  def api_connection
+  def connection
     Faraday.new(
       url: 'https://api.nasa.gov',
       params: { start_date: date, api_key: ENV['nasa_api_key']}
@@ -24,12 +18,18 @@ class NeosAPI
   end
 
   def gather_neos_info
-    api_connection.get('/neo/rest/v1/feed')
+    connection.get('/neo/rest/v1/feed')
   end
 
   def parse_neos_info
     JSON.parse(gather_neos_info.body, symbolize_names: true)
   end
+
+  def neos_from_query_date
+    parse_neos_info[:near_earth_objects][:"#{date}"]
+  end
+
+  private
 
   def date
     @date
