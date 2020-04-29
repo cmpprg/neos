@@ -5,7 +5,7 @@ Figaro.application = Figaro::Application.new(environment: 'production', path: Fi
 Figaro.load
 
 class NeosAPI
-
+  attr_reader :date
   def initialize(query_date)
     @date = query_date
   end
@@ -29,9 +29,12 @@ class NeosAPI
     parse_neos_info[:near_earth_objects][:"#{date}"]
   end
 
-  private
-
-  def date
-    @date
+  def neos_object_data
+    neos_from_query_date.map do |neo|
+      { name: neo[:name],
+        diameter: "#{neo[:estimated_diameter][:feet][:estimated_diameter_max].to_i} ft",
+        miss_distance: "#{neo[:close_approach_data][0][:miss_distance][:miles].to_i} miles" }
+    end
   end
+
 end
