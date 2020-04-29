@@ -52,8 +52,7 @@ class NeosCollectionTest < Minitest::Test
 
     assert_equal [], collection.neos
 
-    collection.create_collection
-
+    assert_equal collection.create_collection, collection.neos
     assert_equal 3, collection.neos.length
     assert_instance_of Neo, collection.neos.first
     assert_instance_of Neo, collection.neos.last

@@ -20,6 +20,7 @@ class NeosCollection
     neos_info.each do |neo_info|
       add_neo(create_neo(neo_info))
     end
+    neos
   end
 
 end
